@@ -1,0 +1,73 @@
+//---------------------------------------------------------------------//
+//---------------------------------------------------------------------//
+//                       CMPS111 : Asgiment 0                          //
+//                             Design.txt                              //
+//                        Author : djespera                            //
+//                                                                     //
+//       mycat.c :                                                     //
+//           Use Cases:                                                //
+//               In order to handle all cases, it is ncessary to       //
+//             to use system calls : read(),write(),close(),and        //
+//             perror().                                               //
+//            -./mycat :(No Arguments)                                 //
+//                                                                     //
+//                To mimic cat : (No Arguments), program must go       //
+//             into a infinite loop , read input from STDIN, and       //
+//             output the read input back to STDOUT. Input that is     //
+//             being read and is used for writing is stored in a       //
+//             a character buffer of size 65,536 bytes (2^16) and      //
+//             is initialized to 0's.If user wants to quit the         //
+//             infinite loop, they may do so either with the key       //
+//             stroke ctrl-c or ctrl-d.                                //
+//                                                                     //
+//                Error Handling is properly handle during the system  //
+//             call read() if the amount of bytes is < 0 (Corrupted)   //
+//             and the during the system call write() if the amount    //
+//             bytes that are being written is the same amount that    //
+//             was read into the buffer.                               //
+//                                                                     //
+//            -./mycat file1 file2 file3 : ( n-Arguments)              //
+//                                                                     //
+//                To mimic cat file1 file2 file3 : (N-Arguments)       //
+//             ,the program must iterate over each file, try and       //
+//             open() the file, if file cannot open,kill the progam    //
+//             and write to stderr with perror. If file open is a      //
+//             a sucess, create a Input & Output buffer for reading    //
+//             into and writing from and initialize the buffer to all  //
+//             0's. raed() the content of the file into the buffer     //
+//             , if the number of bytes in the buffer is <0, a read    //
+//             error occured, so write to stderr with perror.          //
+//             if the number of bytes read in is >= 0, try amd write   //
+//             from the buffer to STDOUT. If the number of bytes       //
+//             written to STDOUT does not match the bytes read in      //
+//             , write to stderr with perror. Else Write to STDOUT     //
+//             After each file has been written, close open(),and      //
+//             and read descriptors(same for .my/cat : (no arguments)  //
+//                                                                     //
+//           -./mycat < file1 > file2 : (File Redirection)             //
+//              After enabling mycat for functionality with no         //
+//            arguments UNIX I/O redirection is possible and will act  //
+//            as if using cat < file1 > file2 .                        //
+//                                                                     //
+//           -./mycat file1 | grep string1 : (Pipeline)                //
+//              After enabling mycat for funcopma;y with n-            //
+//           arugments, UNIX Piplines (sequence of processes)          //
+//           will work with mycat and treat its output as input        //
+//           for the next process.                                     //
+//                                                                     //
+//       mycat.h :                                                     //
+//           Necessary Libaries for System Calls & Flags:              //
+//              <fcntl.h> : file control                               //
+//              <unistd.h> : std symbolic consts and types             //
+//              <sys/types.h> : data types                             //
+//              <stdio.h> :  std i/o                                   //
+//              <stdlib.h> :  std library                              //
+//              <string.h> : string ops                                //
+//                                                                     //
+//           Necessary Macros:                                         //
+//               MAX_BUF : Size of I/O Buffer for read() and write()   //
+//               STDIN_FILENO : Symbol for STDIN for read()            //
+//               STDOUT_FILENO : Symbol for STDOUT for write()         //
+//                                                                     //
+//---------------------------------------------------------------------//
+//---------------------------------------------------------------------//
